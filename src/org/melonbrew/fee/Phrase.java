@@ -1,7 +1,7 @@
 package org.melonbrew.fee;
 
 public enum Phrase {
-	GABEN("GABEN");
+	GABEN("GABENz");
 	
 	private static Fee plugin;
 	
