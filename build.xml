@@ -17,7 +17,7 @@
 		<delete failonerror="false">
 			<fileset dir="build" includes="**/*" />
 		</delete>
-		<delete file="Fe.jar" />
+		<delete file="Fee.jar" />
 		<mkdir dir="build"/>
 	</target>
   
