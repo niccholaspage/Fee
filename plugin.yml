@@ -6,3 +6,7 @@ version: 0.1
 
 softdepend:
 - Vault
+
+commands:
+  yes:
+    usage: Accept this command
