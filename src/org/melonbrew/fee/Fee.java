@@ -102,14 +102,12 @@ public class Fee extends JavaPlugin {
 	private boolean setupEconomy(){
 		economy = null;
 		
-		try {
+		if (getServer().getPluginManager().getPlugin("Vault") != null){
 			RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
 
 			if (economyProvider != null){
 				economy = economyProvider.getProvider();
 			}
-		}catch (Exception e){
-			
 		}
 
 		return economy != null;
