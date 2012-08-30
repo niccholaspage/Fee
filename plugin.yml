@@ -4,10 +4,10 @@ main: org.melonbrew.fee.Fee
 
 version: 0.1
 
-softdepend:
-- Vault
-
 commands:
   yes:
     usage: Accept this command
     description:
+
+softdepend:
+- Vault
