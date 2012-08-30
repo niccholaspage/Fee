@@ -100,7 +100,7 @@ public class Fee extends JavaPlugin {
 	}
 
 	private boolean setupEconomy(){
-		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
 		
 		if (economyProvider != null){
 			economy = economyProvider.getProvider();
