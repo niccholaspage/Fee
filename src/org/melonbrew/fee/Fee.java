@@ -1,20 +1,30 @@
 package org.melonbrew.fee;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.melonbrew.fee.commands.YesCommand;
 
 public class Fee extends JavaPlugin {
 	private Logger log;
 	
 	private Economy economy;
 	
+	private Map<Player, String> commands;
+	
 	public void onEnable(){
 		log = getServer().getLogger();
+		
+		commands = new HashMap<Player, String>();
 		
 		Phrase.init(this);
 		
@@ -35,6 +45,50 @@ public class Fee extends JavaPlugin {
 				"# groupcommands - Per group commands.);\n");
 		
 		saveConfig();
+		
+		getCommand("yes").setExecutor(new YesCommand(this));
+	}
+	
+	public String getKey(String message){
+		message = message.toLowerCase();
+		
+		//Group stuff here
+		
+		ConfigurationSection globalCommands = getConfig().getConfigurationSection("globalcommands");
+		
+		Set<String> keys = globalCommands.getKeys(false);
+		
+		for (String key : keys){
+			if (message.startsWith(key.toLowerCase())){
+				return key;
+			}
+		}
+		
+		return null;
+	}
+	
+	public double getKeyMoney(String key){
+		return getConfig().getDouble("globalcommands." + key);
+	}
+	
+	public String getCommand(Player player){
+		return commands.get(player);
+	}
+	
+	public void addCommand(Player player, String command){
+		commands.put(player, command);
+	}
+	
+	public void removeCommand(Player player){
+		commands.remove(player);
+	}
+	
+	public boolean containsPlayer(Player player){
+		return commands.containsKey(player);
+	}
+	
+	public Map<Player, String> getCommands(){
+		return commands;
 	}
 	
 	public void log(String message){

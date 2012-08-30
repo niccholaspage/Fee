@@ -1,12 +1,11 @@
 package org.melonbrew.fee;
 
-import java.util.Set;
-
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class FeePlayerListener implements Listener {
 	private final Fee plugin;
@@ -21,28 +20,34 @@ public class FeePlayerListener implements Listener {
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event){
 		Player player = event.getPlayer();
 		
-		String message = event.getMessage().toLowerCase();
+		String key = plugin.getKey(event.getMessage());
 		
-		//Do group functionality here
-		
-		ConfigurationSection globalCommands = plugin.getConfig().getConfigurationSection("globalcommands");
-		
-		Set<String> keys = globalCommands.getKeys(false);
-		
-		for (String key : keys){
-			double money = globalCommands.getDouble(key);
+		if (key != null){
+			double money = plugin.getKeyMoney(key);
 			
-			key = key.toLowerCase();
-			
-			if (message.startsWith(key)){
-				if (!plugin.getEconomy().has(player.getName(), money)){
-					player.sendMessage(Phrase.DOES_NOT_HAVE_ENOUGH_MONEY.parseWithPrefix());
-					
-					return;
-				}
-				
-				player.sendMessage(Phrase.COMMAND_WILL_COST.parseWithPrefix(plugin.getEconomy().format(money)));
+			if (!plugin.getEconomy().has(player.getName(), money)){
+				player.sendMessage(Phrase.DOES_NOT_HAVE_ENOUGH_MONEY.parseWithPrefix());
+
+				return;
 			}
+
+			plugin.addCommand(player, key);
+
+			player.sendMessage(Phrase.COMMAND_WILL_COST.parseWithPrefix(plugin.getEconomy().format(money)));
 		}
+	}
+	
+	@EventHandler
+	public void onPlayerQuit(PlayerQuitEvent event){
+		removeCommand(event.getPlayer());
+	}
+	
+	@EventHandler
+	public void onPlayerKick(PlayerKickEvent event){
+		removeCommand(event.getPlayer());
+	}
+	
+	private void removeCommand(Player player){
+		plugin.removeCommand(player);
 	}
 }
