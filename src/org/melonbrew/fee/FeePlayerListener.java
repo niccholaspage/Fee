@@ -35,6 +35,12 @@ public class FeePlayerListener implements Listener {
 			key = key.toLowerCase();
 			
 			if (message.startsWith(key)){
+				if (!plugin.getEconomy().has(player.getName(), money)){
+					player.sendMessage(Phrase.DOES_NOT_HAVE_ENOUGH_MONEY.parseWithPrefix());
+					
+					return;
+				}
+				
 				player.sendMessage(Phrase.COMMAND_WILL_COST.parseWithPrefix(plugin.getEconomy().format(money)));
 			}
 		}
