@@ -1,7 +1,8 @@
 package org.melonbrew.fee;
 
 public enum Phrase {
-	GABEN("GABEN");
+	VAULT_HOOK_FAILED("Could not hook into Vault - disabling Fee."),
+	COMMAND_WILL_COST("This command will cost $1.");
 	
 	private static Fee plugin;
 	

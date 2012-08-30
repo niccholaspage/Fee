@@ -2,14 +2,29 @@ package org.melonbrew.fee;
 
 import java.util.logging.Logger;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Fee extends JavaPlugin {
 	private Logger log;
 	
+	private Economy economy;
+	
 	public void onEnable(){
 		log = getServer().getLogger();
+		
+		Phrase.init(this);
+		
+		if (!setupEconomy()){
+			log(Phrase.VAULT_HOOK_FAILED);
+			
+			getServer().getPluginManager().disablePlugin(this);
+			
+			return;
+		}
 		
 		getConfig().options().copyDefaults(true);
 		
@@ -28,6 +43,20 @@ public class Fee extends JavaPlugin {
 	
 	public void log(Phrase phrase, String... args){
 		log(phrase.parse(args));
+	}
+
+	private boolean setupEconomy(){
+		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		
+		if (economyProvider != null){
+			economy = economyProvider.getProvider();
+		}
+
+		return economy != null;
+	}
+	
+	public Economy getEconomy(){
+		return economy;
 	}
 	
 	public String getMessagePrefix(){
