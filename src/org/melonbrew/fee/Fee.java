@@ -46,7 +46,7 @@ public class Fee extends JavaPlugin {
 		
 		saveConfig();
 		
-		getCommand("yes").setExecutor(new YesCommand(this));
+		getCommand("test").setExecutor(new YesCommand(this));
 	}
 	
 	public String getKey(String message){
