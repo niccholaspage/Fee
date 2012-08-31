@@ -5,7 +5,7 @@ main: org.melonbrew.fee.Fee
 version: 0.1
 
 commands:
-  yes:
+  "yes":
     usage: Accept this command
     description:
 
