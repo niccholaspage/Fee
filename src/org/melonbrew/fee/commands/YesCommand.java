@@ -15,7 +15,7 @@ public class YesCommand implements CommandExecutor {
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		if (!(sender instanceof CommandSender)){
+		if (!(sender instanceof Player)){
 			sender.sendMessage(Phrase.YOU_ARE_NOT_A_PLAYER.parseWithPrefix());
 			
 			return true;
