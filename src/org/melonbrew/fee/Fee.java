@@ -36,6 +36,8 @@ public class Fee extends JavaPlugin {
 			return;
 		}
 		
+		new FeePlayerListener(this);
+		
 		getConfig().options().copyDefaults(true);
 		
 		getConfig().options().header("Fee Config - melonbrew.org\n" +

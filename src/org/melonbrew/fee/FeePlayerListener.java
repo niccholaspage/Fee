@@ -26,8 +26,10 @@ public class FeePlayerListener implements Listener {
 			double money = plugin.getKeyMoney(key);
 			
 			if (!plugin.getEconomy().has(player.getName(), money)){
-				player.sendMessage(Phrase.DOES_NOT_HAVE_ENOUGH_MONEY.parseWithPrefix());
-
+				player.sendMessage(Phrase.NEED_MONEY.parseWithPrefix(plugin.getEconomy().format(money)));
+				
+				event.setCancelled(true);
+				
 				return;
 			}
 
