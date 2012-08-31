@@ -118,6 +118,6 @@ public class Fee extends JavaPlugin {
 	}
 	
 	public String getMessagePrefix(){
-		return ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "Fe" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+		return ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "Fee" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
 	}
 }
