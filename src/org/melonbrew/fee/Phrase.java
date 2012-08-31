@@ -5,7 +5,8 @@ public enum Phrase {
 	COMMAND_WILL_COST("This command will cost $1. Type /yes to use this command."),
 	DOES_NOT_HAVE_ENOUGH_MONEY("You don't have enough money to use this command."),
 	NO_PENDING_COMMAND("You don't have a pending command."),
-	YOU_ARE_NOT_A_PLAYER("Silly console, you aren't a player!");
+	YOU_ARE_NOT_A_PLAYER("Silly console, you aren't a player!"),
+	YOU_ARE_NOT_A_PLAYER_TWO("Silly console, Trix are for kids!");
 	
 	private static Fee plugin;
 	

@@ -1,5 +1,7 @@
 package org.melonbrew.fee.commands;
 
+import java.util.Random;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,13 +12,21 @@ import org.melonbrew.fee.Phrase;
 public class YesCommand implements CommandExecutor {
 	private final Fee plugin;
 	
+	private final Random random;
+	
 	public YesCommand(Fee plugin){
 		this.plugin = plugin;
+		
+		random = new Random();
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if (!(sender instanceof Player)){
-			sender.sendMessage(Phrase.YOU_ARE_NOT_A_PLAYER.parseWithPrefix());
+			if (random.nextFloat() <= 0.50F){
+				sender.sendMessage(Phrase.YOU_ARE_NOT_A_PLAYER.parseWithPrefix());
+			}else {
+				sender.sendMessage(Phrase.YOU_ARE_NOT_A_PLAYER_TWO.parseWithPrefix());
+			}
 			
 			return true;
 		}
