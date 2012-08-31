@@ -92,7 +92,7 @@ public class Fee extends JavaPlugin {
 	}
 	
 	public void log(String message){
-		log.info("[Fe] " + message);
+		log.info("[Fee] " + message);
 	}
 	
 	public void log(Phrase phrase, String... args){
