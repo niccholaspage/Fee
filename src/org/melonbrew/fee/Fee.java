@@ -46,7 +46,7 @@ public class Fee extends JavaPlugin {
 				"# serveraccount - An account for fees to go too. (Blank for none)\n" +
 				"# closespeed - How many milliseconds (1000 milliseconds is 1 second) before doors, trapdoors and gates auto close.\n" +
 				"# globalcommands - A command followed by it's cost. For all players.\n" +
-				"# groupcommands - Per group commands.);\n");
+				"# groupcommands - Per group commands.");
 		
 		saveConfig();
 		
