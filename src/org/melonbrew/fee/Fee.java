@@ -154,4 +154,26 @@ public class Fee extends JavaPlugin {
 	public String getMessagePrefix(){
 		return ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "Fee" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
 	}
+	
+	public String getEqualMessage(String inBetween, int length){
+		return getEqualMessage(inBetween, length, length);
+	}
+	
+	public String getEqualMessage(String inBetween, int length, int length2){
+		String equals = getEndEqualMessage(length);
+		
+		String end = getEndEqualMessage(length2);
+		
+		return equals + ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + inBetween + ChatColor.DARK_GRAY + "]" + end;
+	}
+	
+	public String getEndEqualMessage(int length){
+		String message = ChatColor.GRAY + "";
+		
+		for (int i = 0; i < length; i++){
+			message += "=";
+		}
+		
+		return message;
+	}
 }

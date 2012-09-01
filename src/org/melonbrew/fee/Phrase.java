@@ -6,7 +6,14 @@ public enum Phrase {
 	NEED_MONEY("You need $1 to use this command."),
 	NO_PENDING_COMMAND("You don't have a pending command."),
 	YOU_ARE_NOT_A_PLAYER("Silly console, you aren't a player!"),
-	YOU_ARE_NOT_A_PLAYER_TWO("Silly console, Trix are for kids!");
+	YOU_ARE_NOT_A_PLAYER_TWO("Silly console, Trix are for kids!"),
+	COMMAND_NEEDS_ARGUMENTS("That command needs arguments."),
+	COMMAND_NOT_CONSOLE("The command '$1' cannot be used in the console."),
+	NO_PERMISSION_FOR_COMMAND("You do not have permission to use that command."),
+	TRY_COMMAND("Try $1"),
+	HELP("Fee Help"),
+	HELP_ARGUMENTS("$1 Required, $2 Optional"),
+	COMMAND_HELP("Gives you help", true);
 	
 	private static Fee plugin;
 	
