@@ -33,7 +33,9 @@ public class FeePlayerListener implements Listener {
 				return;
 			}
 
-			plugin.addCommand(player, key);
+			plugin.addSession(new Session(player, key));
+			
+			event.setCancelled(true);
 
 			player.sendMessage(Phrase.COMMAND_WILL_COST.parseWithPrefix(plugin.getEconomy().format(money)));
 		}
@@ -41,15 +43,15 @@ public class FeePlayerListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event){
-		removeCommand(event.getPlayer());
+		removeSession(event.getPlayer());
 	}
 	
 	@EventHandler
 	public void onPlayerKick(PlayerKickEvent event){
-		removeCommand(event.getPlayer());
+		removeSession(event.getPlayer());
 	}
 	
-	private void removeCommand(Player player){
-		plugin.removeCommand(player);
+	private void removeSession(Player player){
+		plugin.removeSession(player);
 	}
 }

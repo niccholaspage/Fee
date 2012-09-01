@@ -1,7 +1,6 @@
 package org.melonbrew.fee;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -19,12 +18,12 @@ public class Fee extends JavaPlugin {
 	
 	private Economy economy;
 	
-	private Map<Player, String> commands;
+	private Set<Session> sessions;
 	
 	public void onEnable(){
 		log = getServer().getLogger();
 		
-		commands = new HashMap<Player, String>();
+		sessions = new HashSet<Session>();
 		
 		Phrase.init(this);
 		
@@ -73,24 +72,30 @@ public class Fee extends JavaPlugin {
 		return getConfig().getDouble("globalcommands." + key);
 	}
 	
-	public String getCommand(Player player){
-		return commands.get(player);
+	public Session getSession(Player player){
+		for (Session session : sessions){
+			if (session.getPlayer().equals(player)){
+				return session;
+			}
+		}
+		
+		return null;
 	}
 	
-	public void addCommand(Player player, String command){
-		commands.put(player, command);
+	public void addSession(Session session){
+		sessions.add(session);
 	}
 	
-	public void removeCommand(Player player){
-		commands.remove(player);
+	public void removeSession(Player player){
+		for (Session session : new HashSet<Session>(sessions)){
+			if (session.getPlayer().equals(player)){
+				sessions.remove(session);
+			}
+		}
 	}
 	
-	public boolean containsPlayer(Player player){
-		return commands.containsKey(player);
-	}
-	
-	public Map<Player, String> getCommands(){
-		return commands;
+	public Set<Session> getSessions(){
+		return sessions;
 	}
 	
 	public void log(String message){

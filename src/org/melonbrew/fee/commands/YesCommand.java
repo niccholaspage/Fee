@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.melonbrew.fee.Fee;
 import org.melonbrew.fee.Phrase;
+import org.melonbrew.fee.Session;
 
 public class YesCommand implements CommandExecutor {
 	private final Fee plugin;
@@ -33,23 +34,25 @@ public class YesCommand implements CommandExecutor {
 		
 		Player player = (Player) sender;
 		
-		if (!plugin.containsPlayer(player)){
+		Session session = plugin.getSession(player);
+		
+		if (session == null){
 			sender.sendMessage(Phrase.NO_PENDING_COMMAND.parseWithPrefix());
 			
 			return true;
 		}
 		
-		String command = plugin.getCommand(player);
+		String command = session.getCommand();
 		
 		if (plugin.getKeyMoney(command) == -1){
-			plugin.removeCommand(player);
+			plugin.removeSession(player);
 			
 			sender.sendMessage(Phrase.NO_PENDING_COMMAND.parseWithPrefix());
 			
 			return true;
 		}
 		
-		plugin.removeCommand(player);
+		plugin.removeSession(player);
 		
 		player.chat(command);
 		
