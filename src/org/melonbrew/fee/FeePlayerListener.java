@@ -20,7 +20,7 @@ public class FeePlayerListener implements Listener {
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event){
 		Player player = event.getPlayer();
 		
-		String key = plugin.getKey(event.getMessage());
+		String key = plugin.getKey(player, event.getMessage());
 		
 		if (key != null){
 			Session session = plugin.getSession(player);

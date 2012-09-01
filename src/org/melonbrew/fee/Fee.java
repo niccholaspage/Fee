@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -17,6 +18,8 @@ public class Fee extends JavaPlugin {
 	private Logger log;
 	
 	private Economy economy;
+	
+	private Permission permission;
 	
 	private Set<Session> sessions;
 	
@@ -50,10 +53,26 @@ public class Fee extends JavaPlugin {
 		getCommand("yes").setExecutor(new YesCommand(this));
 	}
 	
-	public String getKey(String message){
+	public String getKey(Player player, String message){
 		message = message.toLowerCase();
 		
-		//Group stuff here
+		try {
+			String group = permission.getPrimaryGroup(player);
+			
+			ConfigurationSection groupCommands = getConfig().getConfigurationSection("groupcommands." + group);
+			
+			if (groupCommands != null){
+				Set<String> keys = groupCommands.getKeys(false);
+				
+				for (String key : keys){
+					if (message.startsWith(key.toLowerCase())){
+						return key;
+					}
+				}
+			}
+		}catch (UnsupportedOperationException e){
+			
+		}
 		
 		ConfigurationSection globalCommands = getConfig().getConfigurationSection("globalcommands");
 		
@@ -109,11 +128,19 @@ public class Fee extends JavaPlugin {
 	private boolean setupEconomy(){
 		economy = null;
 		
+		permission = null;
+		
 		if (getServer().getPluginManager().getPlugin("Vault") != null){
 			RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
 
 			if (economyProvider != null){
 				economy = economyProvider.getProvider();
+			}
+			
+			RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(Permission.class);
+			
+			if (permissionProvider != null){
+				permission = permissionProvider.getProvider();
 			}
 		}
 
