@@ -20,12 +20,14 @@ public class FeePlayerListener implements Listener {
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event){
 		Player player = event.getPlayer();
 		
-		String key = plugin.getKey(player, event.getMessage());
+		String message = event.getMessage();
+		
+		String key = plugin.getKey(player, message);
 		
 		if (key != null){
 			Session session = plugin.getSession(player);
 			
-			if (session != null && session.getCommand().equals(key) && session.isNextCommandFree()){
+			if (session != null && session.getCommand().toLowerCase().startsWith(key) && session.isNextCommandFree()){
 				plugin.removeSession(event.getPlayer());
 				
 				return;
@@ -43,7 +45,7 @@ public class FeePlayerListener implements Listener {
 			
 			plugin.removeSession(event.getPlayer());
 
-			plugin.addSession(new Session(player, key));
+			plugin.addSession(new Session(player, message));
 			
 			event.setCancelled(true);
 
