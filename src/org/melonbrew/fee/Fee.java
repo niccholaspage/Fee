@@ -50,6 +50,8 @@ public class Fee extends JavaPlugin {
 		
 		saveConfig();
 		
+		getCommand("fee").setExecutor(new FeeCommand(this));
+		
 		getCommand("yes").setExecutor(new YesCommand(this));
 	}
 	

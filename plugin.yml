@@ -5,6 +5,9 @@ main: org.melonbrew.fee.Fee
 version: 0.1
 
 commands:
+  fee:
+    usage: Gives help
+    description:
   "yes":
     usage: Accept this command
     description:
