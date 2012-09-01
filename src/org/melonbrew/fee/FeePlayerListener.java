@@ -23,6 +23,14 @@ public class FeePlayerListener implements Listener {
 		String key = plugin.getKey(event.getMessage());
 		
 		if (key != null){
+			Session session = plugin.getSession(player);
+			
+			if (session != null && session.getCommand().equals(key) && session.isNextCommandFree()){
+				plugin.removeSession(event.getPlayer());
+				
+				return;
+			}
+			
 			double money = plugin.getKeyMoney(key);
 			
 			if (!plugin.getEconomy().has(player.getName(), money)){
@@ -32,6 +40,8 @@ public class FeePlayerListener implements Listener {
 				
 				return;
 			}
+			
+			plugin.removeSession(event.getPlayer());
 
 			plugin.addSession(new Session(player, key));
 			

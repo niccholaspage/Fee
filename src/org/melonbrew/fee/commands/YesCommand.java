@@ -44,7 +44,9 @@ public class YesCommand implements CommandExecutor {
 		
 		String command = session.getCommand();
 		
-		if (plugin.getKeyMoney(command) == -1){
+		double money = plugin.getKeyMoney(command);
+		
+		if (money == -1){
 			plugin.removeSession(player);
 			
 			sender.sendMessage(Phrase.NO_PENDING_COMMAND.parseWithPrefix());
@@ -52,7 +54,15 @@ public class YesCommand implements CommandExecutor {
 			return true;
 		}
 		
-		plugin.removeSession(player);
+		if (!plugin.getEconomy().has(player.getName(), money)){
+			player.sendMessage(Phrase.NEED_MONEY.parseWithPrefix(plugin.getEconomy().format(money)));
+			
+			return true;
+		}
+		
+		plugin.getEconomy().withdrawPlayer(player.getName(), money);
+		
+		session.setNextCommandFree(true);
 		
 		player.chat(command);
 		
