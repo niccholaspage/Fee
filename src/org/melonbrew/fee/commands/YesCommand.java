@@ -62,6 +62,12 @@ public class YesCommand implements CommandExecutor {
 		
 		plugin.getEconomy().withdrawPlayer(player.getName(), money);
 		
+		String reciever = plugin.getConfig().getString("serveraccount");
+		
+		if (plugin.getEconomy().hasAccount(reciever)){
+			plugin.getEconomy().depositPlayer(reciever, money);
+		}
+		
 		session.setNextCommandFree(true);
 		
 		player.chat(command);
