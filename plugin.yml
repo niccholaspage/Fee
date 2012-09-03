@@ -23,6 +23,7 @@ permissions:
     usage: Allows you to reload the config
   fee.member:
     children:
+      fee.sign: true
       fee.?: true
     default: true
   fee.admin:
