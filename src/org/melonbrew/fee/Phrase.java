@@ -1,5 +1,6 @@
 package org.melonbrew.fee;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public enum Phrase {
@@ -16,7 +17,7 @@ public enum Phrase {
 	HELP("Fee Help"),
 	HELP_ARGUMENTS("$1 Required, $2 Optional"),
 	CONFIG_RELOADED("The config has been reloaded."),
-	SIGN_START("[Fee]"),
+	SIGN_START(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "Fee" + ChatColor.DARK_GRAY + "]"),
 	INVALID_AMOUNT("You cannot create a sign with an invalid amount of money."),
 	CREATED_A_SIGN("You've created a Fee sign."),
 	COMMAND_HELP("Gives you help", true),
