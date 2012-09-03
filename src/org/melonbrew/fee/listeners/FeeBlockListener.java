@@ -1,8 +1,5 @@
 package org.melonbrew.fee.listeners;
 
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,17 +17,7 @@ public class FeeBlockListener implements Listener {
 	public void onSignChange(SignChangeEvent event){
 		Player player = event.getPlayer();
 		
-		Block block = event.getBlock();
-		
-		BlockState state = block.getState();
-		
-		if (!(state instanceof Sign)){
-			return;
-		}
-		
-		Sign sign = (Sign) state;
-		
-		String firstLine = sign.getLine(0).replaceAll("(?i)\u00A7[0-F]", "");
+		String firstLine = event.getLine(0).replaceAll("(?i)\u00A7[0-F]", "");
 		
 		if (!(firstLine.startsWith(Phrase.SIGN_START.parse()))){
 			return;
@@ -43,7 +30,7 @@ public class FeeBlockListener implements Listener {
 		}
 		
 		try {
-			Double.parseDouble(sign.getLine(1));
+			Double.parseDouble(event.getLine(1));
 		} catch (NumberFormatException e){
 			event.setCancelled(true);
 			
@@ -52,9 +39,7 @@ public class FeeBlockListener implements Listener {
 			return;
 		}
 		
-		sign.setLine(2, player.getName());
-		
-		sign.update(true);
+		event.setLine(2, player.getName());
 		
 		Phrase.CREATED_A_SIGN.sendWithPrefix(player);
 	}
