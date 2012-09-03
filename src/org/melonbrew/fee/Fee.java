@@ -8,11 +8,13 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.melonbrew.fee.commands.YesCommand;
+import org.melonbrew.fee.listeners.*;
 
 public class Fee extends JavaPlugin {
 	private Logger log;
@@ -23,10 +25,16 @@ public class Fee extends JavaPlugin {
 	
 	private Set<Session> sessions;
 	
+	private Set<Material> supportedBlocks;
+	
 	public void onEnable(){
 		log = getServer().getLogger();
 		
 		sessions = new HashSet<Session>();
+		
+		supportedBlocks = new HashSet<Material>();
+		
+		addSupportedBlock(Material.WOODEN_DOOR);
 		
 		Phrase.init(this);
 		
@@ -39,6 +47,8 @@ public class Fee extends JavaPlugin {
 		}
 		
 		new FeePlayerListener(this);
+		
+		new FeeBlockListener(this);
 		
 		getConfig().options().copyDefaults(true);
 		
@@ -53,6 +63,14 @@ public class Fee extends JavaPlugin {
 		getCommand("fee").setExecutor(new FeeCommand(this));
 		
 		getCommand("yes").setExecutor(new YesCommand(this));
+	}
+	
+	public void addSupportedBlock(Material type){
+		supportedBlocks.add(type);
+	}
+	
+	public Set<Material> getSupportedBlocks(){
+		return supportedBlocks;
 	}
 	
 	public String getKey(Player player, String message){

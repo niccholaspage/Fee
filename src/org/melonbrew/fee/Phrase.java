@@ -14,6 +14,9 @@ public enum Phrase {
 	HELP("Fee Help"),
 	HELP_ARGUMENTS("$1 Required, $2 Optional"),
 	CONFIG_RELOADED("The config has been reloaded."),
+	SIGN_START("[Fee]"),
+	INVALID_AMOUNT("You cannot create a sign with an invalid amount of money."),
+	CREATED_A_SIGN("You've created a Fee sign."),
 	COMMAND_HELP("Gives you help", true),
 	COMMAND_RELOAD("Reloads the config", true);
 	

@@ -13,10 +13,12 @@ commands:
     description:
 
 permissions:
-  fee.exempt:
-    usage: Exempts a player from all fees
+  fee.sign:
+    usage: Allows you to make a Fee sign
   fee.?:
     usage: Allows you to check the help
+  fee.exempt:
+    usage: Exempts a player from all fees
   fee.reload:
     usage: Allows you to reload the config
   fee.member:
