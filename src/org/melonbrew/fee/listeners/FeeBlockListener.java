@@ -55,5 +55,7 @@ public class FeeBlockListener implements Listener {
 		sign.setLine(2, player.getName());
 		
 		sign.update(true);
+		
+		player.sendMessage(Phrase.CREATED_A_SIGN.parseWithPrefix());
 	}
 }
