@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.melonbrew.fee.command.CommandType;
 import org.melonbrew.fee.command.SubCommand;
 import org.melonbrew.fee.commands.HelpCommand;
+import org.melonbrew.fee.commands.ReloadCommand;
 
 public class FeeCommand implements CommandExecutor {
 	private final Fee plugin;
@@ -23,6 +24,7 @@ public class FeeCommand implements CommandExecutor {
 		commands = new ArrayList<SubCommand>();
 		
 		commands.add(new HelpCommand(plugin, this));
+		commands.add(new ReloadCommand(plugin));
 	}
 	
 	public List<SubCommand> getCommands(){

@@ -13,7 +13,9 @@ public enum Phrase {
 	TRY_COMMAND("Try $1"),
 	HELP("Fee Help"),
 	HELP_ARGUMENTS("$1 Required, $2 Optional"),
-	COMMAND_HELP("Gives you help", true);
+	CONFIG_RELOADED("The config has been reloaded."),
+	COMMAND_HELP("Gives you help", true),
+	COMMAND_RELOAD("Reloads the config", true);
 	
 	private static Fee plugin;
 	
