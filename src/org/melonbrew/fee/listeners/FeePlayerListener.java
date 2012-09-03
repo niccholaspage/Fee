@@ -43,7 +43,7 @@ public class FeePlayerListener implements Listener {
 			double money = plugin.getKeyMoney(key);
 			
 			if (!plugin.getEconomy().has(player.getName(), money)){
-				player.sendMessage(Phrase.NEED_MONEY.parseWithPrefix(plugin.getEconomy().format(money)));
+				Phrase.NEED_MONEY.sendWithPrefix(player, plugin.getEconomy().format(money));
 				
 				event.setCancelled(true);
 				
@@ -56,7 +56,7 @@ public class FeePlayerListener implements Listener {
 			
 			event.setCancelled(true);
 
-			player.sendMessage(Phrase.COMMAND_WILL_COST.parseWithPrefix(plugin.getEconomy().format(money)));
+			Phrase.COMMAND_WILL_COST.sendWithPrefix(player, plugin.getEconomy().format(money));
 		}
 	}
 	

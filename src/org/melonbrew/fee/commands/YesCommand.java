@@ -24,9 +24,9 @@ public class YesCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if (!(sender instanceof Player)){
 			if (random.nextFloat() <= 0.50F){
-				sender.sendMessage(Phrase.YOU_ARE_NOT_A_PLAYER.parseWithPrefix());
+				Phrase.YOU_ARE_NOT_A_PLAYER.sendWithPrefix(sender);
 			}else {
-				sender.sendMessage(Phrase.YOU_ARE_NOT_A_PLAYER_TWO.parseWithPrefix());
+				Phrase.YOU_ARE_NOT_A_PLAYER_TWO.sendWithPrefix(sender);
 			}
 			
 			return true;
@@ -37,7 +37,7 @@ public class YesCommand implements CommandExecutor {
 		Session session = plugin.getSession(player);
 		
 		if (session == null){
-			sender.sendMessage(Phrase.NO_PENDING_COMMAND.parseWithPrefix());
+			Phrase.NO_PENDING_COMMAND.sendWithPrefix(sender);
 			
 			return true;
 		}
@@ -48,14 +48,14 @@ public class YesCommand implements CommandExecutor {
 		
 		if (money == -1){
 			plugin.removeSession(player);
-			
-			sender.sendMessage(Phrase.NO_PENDING_COMMAND.parseWithPrefix());
+
+			Phrase.NO_PENDING_COMMAND.sendWithPrefix(sender);
 			
 			return true;
 		}
 		
 		if (!plugin.getEconomy().has(player.getName(), money)){
-			player.sendMessage(Phrase.NEED_MONEY.parseWithPrefix(plugin.getEconomy().format(money)));
+			Phrase.NEED_MONEY.sendWithPrefix(sender, plugin.getEconomy().format(money));
 			
 			return true;
 		}

@@ -47,7 +47,7 @@ public class FeeBlockListener implements Listener {
 		} catch (NumberFormatException e){
 			event.setCancelled(true);
 			
-			player.sendMessage(Phrase.INVALID_AMOUNT.parseWithPrefix());
+			Phrase.INVALID_AMOUNT.sendWithPrefix(player);
 			
 			return;
 		}
@@ -56,6 +56,6 @@ public class FeeBlockListener implements Listener {
 		
 		sign.update(true);
 		
-		player.sendMessage(Phrase.CREATED_A_SIGN.parseWithPrefix());
+		Phrase.CREATED_A_SIGN.sendWithPrefix(player);
 	}
 }

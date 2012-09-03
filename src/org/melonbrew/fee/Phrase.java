@@ -1,5 +1,7 @@
 package org.melonbrew.fee;
 
+import org.bukkit.command.CommandSender;
+
 public enum Phrase {
 	VAULT_HOOK_FAILED("Could not hook into Vault - disabling Fee."),
 	COMMAND_WILL_COST("This command will cost $1. Type /yes to use this command."),
@@ -78,8 +80,16 @@ public enum Phrase {
 		return parse(params).replace(" ", "");
 	}
 	
-	public String parseWithPrefix(String... params){
+	private String parseWithPrefix(String... params){
 		return plugin.getMessagePrefix() + parse(params);
+	}
+	
+	public void send(CommandSender sender, String... params){
+		sender.sendMessage(parse(params));
+	}
+	
+	public void sendWithPrefix(CommandSender sender, String... params){
+		sender.sendMessage(parseWithPrefix(params));
 	}
 	
 	public static void init(Fee instance){
