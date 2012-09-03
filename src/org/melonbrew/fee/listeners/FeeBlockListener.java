@@ -1,5 +1,6 @@
 package org.melonbrew.fee.listeners;
 
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,7 +25,7 @@ public class FeeBlockListener implements Listener {
 		}
 		
 		if (!player.hasPermission("fee.sign")){
-			event.setCancelled(true);
+			cancelSignChange(event);
 			
 			return;
 		}
@@ -32,7 +33,7 @@ public class FeeBlockListener implements Listener {
 		try {
 			Double.parseDouble(event.getLine(1));
 		} catch (NumberFormatException e){
-			event.setCancelled(true);
+			cancelSignChange(event);
 			
 			Phrase.INVALID_AMOUNT.sendWithPrefix(player);
 			
@@ -42,5 +43,15 @@ public class FeeBlockListener implements Listener {
 		event.setLine(2, player.getName());
 		
 		Phrase.CREATED_A_SIGN.sendWithPrefix(player);
+	}
+	
+	private void cancelSignChange(SignChangeEvent event){
+		event.setCancelled(true);
+		
+		Block block = event.getBlock();
+		
+		block.breakNaturally();
+		
+		
 	}
 }
