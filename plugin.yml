@@ -12,5 +12,9 @@ commands:
     usage: Accept this command
     description:
 
+permissions:
+  fee.exempt:
+    usage: Exempts a player from all fees
+
 softdepend:
 - Vault

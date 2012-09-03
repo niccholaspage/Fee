@@ -20,6 +20,10 @@ public class FeePlayerListener implements Listener {
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event){
 		Player player = event.getPlayer();
 		
+		if (player.hasPermission("fee.exempt")){
+			return;
+		}
+		
 		String message = event.getMessage();
 		
 		String key = plugin.getKey(player, message);
