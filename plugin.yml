@@ -19,6 +19,13 @@ permissions:
     usage: Allows you to check the help
   fee.reload:
     usage: Allows you to reload the config
+  fee.member:
+    children:
+      fee.?: true
+    default: true
+  fee.admin:
+    children:
+      fee.reload: true
 
 softdepend:
 - Vault
