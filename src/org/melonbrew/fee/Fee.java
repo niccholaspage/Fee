@@ -69,6 +69,16 @@ public class Fee extends JavaPlugin {
 		supportedBlocks.add(type);
 	}
 	
+	public boolean containsSupportedBlock(Material type){
+		for (Material material : supportedBlocks){
+			if (material == type){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public Set<Material> getSupportedBlocks(){
 		return supportedBlocks;
 	}

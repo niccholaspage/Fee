@@ -18,6 +18,7 @@ public enum Phrase {
 	CONFIG_RELOADED("The config has been reloaded."),
 	SIGN_START("[Fee]"),
 	INVALID_AMOUNT("You cannot create a sign with an invalid amount of money."),
+	NOT_ABOVE_SUPPORTED_ITEM("The sign is not above a supported block."),
 	CREATED_A_SIGN("You've created a Fee sign."),
 	COMMAND_HELP("Gives you help", true),
 	COMMAND_RELOAD("Reloads the config", true);
