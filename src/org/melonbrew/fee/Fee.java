@@ -35,6 +35,10 @@ public class Fee extends JavaPlugin {
 		supportedBlocks = new HashSet<Material>();
 		
 		addSupportedBlock(Material.WOODEN_DOOR);
+		addSupportedBlock(Material.TRAP_DOOR);
+		addSupportedBlock(Material.FURNACE);
+		addSupportedBlock(Material.CHEST);
+		addSupportedBlock(Material.FENCE_GATE);
 		
 		Phrase.init(this);
 		

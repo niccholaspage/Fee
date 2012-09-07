@@ -1,9 +1,16 @@
 package org.melonbrew.fee.listeners;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.melonbrew.fee.Fee;
@@ -17,6 +24,49 @@ public class FeePlayerListener implements Listener {
 		this.plugin = plugin;
 		
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+	}
+	
+	@EventHandler
+	public void onPlayerInteract(PlayerInteractEvent event){
+		Block block = event.getClickedBlock();
+		
+		if (block == null){
+			return;
+		}
+		
+		Player player = event.getPlayer();
+		
+		Material type = block.getType();
+		
+		if (event.getAction() == Action.LEFT_CLICK_BLOCK){
+			if (type == Material.FURNACE || type == Material.CHEST){
+				return;
+			}
+		}
+		
+		if (!plugin.containsSupportedBlock(type)){
+			return;
+		}
+		
+		Block signBlock = block.getRelative(BlockFace.DOWN);
+		
+		if (signBlock == null || !(signBlock.getState() instanceof Sign)){
+			return;
+		}
+		
+		if (player.hasPermission("fee.exempt")){
+			return;
+		}
+		
+		Sign sign = (Sign) signBlock.getState();
+		
+		String firstLine = ChatColor.stripColor(sign.getLine(0));
+		
+		String noColorSign = ChatColor.stripColor(Phrase.SIGN_START.parse());
+		
+		if (!(firstLine.equalsIgnoreCase(noColorSign))){
+			return;
+		}
 	}
 	
 	@EventHandler
