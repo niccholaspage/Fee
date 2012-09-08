@@ -59,7 +59,7 @@ public class YesCommand implements CommandExecutor {
 		double money;
 		
 		if (command == null){
-			Block signBlock = block.getRelative(BlockFace.DOWN);
+			Block signBlock = block.getRelative(BlockFace.UP);
 			
 			if (signBlock == null || !(signBlock.getState() instanceof Sign)){
 				return true;
