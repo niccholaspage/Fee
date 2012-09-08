@@ -72,7 +72,9 @@ public class FeePlayerListener implements Listener {
 		
 		plugin.addSession(new Session(player, block));
 		
-		Phrase.COMMAND_WILL_COST.sendWithPrefix(player, plugin.getEconomy().format(Double.parseDouble(sign.getLine(1))));
+		event.setCancelled(true);
+		
+		Phrase.BLOCK_WILL_COST.sendWithPrefix(player, plugin.getEconomy().format(Double.parseDouble(sign.getLine(1))));
 	}
 	
 	@EventHandler
