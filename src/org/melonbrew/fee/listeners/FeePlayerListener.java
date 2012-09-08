@@ -48,7 +48,7 @@ public class FeePlayerListener implements Listener {
 			return;
 		}
 		
-		Block signBlock = block.getRelative(BlockFace.DOWN);
+		Block signBlock = block.getRelative(BlockFace.UP);
 		
 		if (signBlock == null || !(signBlock.getState() instanceof Sign)){
 			return;
