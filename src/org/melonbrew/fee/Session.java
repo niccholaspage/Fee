@@ -1,5 +1,6 @@
 package org.melonbrew.fee;
 
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class Session {
@@ -7,12 +8,24 @@ public class Session {
 	
 	private final String command;
 	
+	private final Block block;
+	
 	private boolean nextCommandFree;
 	
 	public Session(Player player, String command){
+		this(player, command, null);
+	}
+	
+	public Session(Player player, Block block){
+		this(player, null, block);
+	}
+	
+	public Session(Player player, String command, Block block){
 		this.player = player;
 		
 		this.command = command;
+		
+		this.block = block;
 		
 		nextCommandFree = false;
 	}
@@ -23,6 +36,10 @@ public class Session {
 	
 	public String getCommand(){
 		return command;
+	}
+	
+	public Block getBlock(){
+		return block;
 	}
 	
 	public void setNextCommandFree(boolean nextCommandFree){

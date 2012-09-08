@@ -67,6 +67,12 @@ public class FeePlayerListener implements Listener {
 		if (!(firstLine.equalsIgnoreCase(noColorSign))){
 			return;
 		}
+		
+		plugin.removeSession(player);
+		
+		plugin.addSession(new Session(player, block));
+		
+		Phrase.COMMAND_WILL_COST.sendWithPrefix(player, plugin.getEconomy().format(Double.parseDouble(sign.getLine(1))));
 	}
 	
 	@EventHandler
