@@ -103,10 +103,6 @@ public class YesCommand implements CommandExecutor {
 		}
 		
 		if (command == null){
-			session.setNextCommandFree(true);
-			
-			player.chat(command);
-		}else {
 			BlockState state = block.getState();
 			
 			if (state instanceof Door){
@@ -120,6 +116,10 @@ public class YesCommand implements CommandExecutor {
 			} else if (state.getData() instanceof Gate){
 				((Gate) state.getData()).setOpen(true);
 			}
+		}else {
+			session.setNextCommandFree(true);
+			
+			player.chat(command);
 		}
 		
 		return true;
