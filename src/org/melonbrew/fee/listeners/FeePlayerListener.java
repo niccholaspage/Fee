@@ -48,6 +48,10 @@ public class FeePlayerListener implements Listener {
 		
 		Sign sign = plugin.getSign(player, block, true);
 		
+		if (sign == null){
+			return;
+		}
+		
 		plugin.removeSession(player);
 		
 		plugin.addSession(new Session(player, block));

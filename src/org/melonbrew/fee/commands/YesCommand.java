@@ -54,11 +54,15 @@ public class YesCommand implements CommandExecutor {
 		
 		Block block = session.getBlock();
 		
+		Sign sign = null;
+		
+		if (block != null){
+			sign = plugin.getSign(player, block, true);
+		}
+		
 		double money;
 		
 		if (command == null){
-			Sign sign = plugin.getSign(player, block, true);
-			
 			money = Double.parseDouble(sign.getLine(1));
 		}else {
 			money = plugin.getKeyMoney(command);
@@ -80,7 +84,13 @@ public class YesCommand implements CommandExecutor {
 		
 		plugin.getEconomy().withdrawPlayer(player.getName(), money);
 		
-		String reciever = plugin.getConfig().getString("serveraccount");
+		String reciever = null;
+		
+		if (sign != null){
+			reciever = sign.getLine(2);
+		}else {
+			reciever = plugin.getConfig().getString("serveraccount");
+		}
 		
 		if (plugin.getEconomy().hasAccount(reciever)){
 			plugin.getEconomy().depositPlayer(reciever, money);
@@ -100,6 +110,8 @@ public class YesCommand implements CommandExecutor {
 			} else if (state.getData() instanceof Gate){
 				((Gate) state.getData()).setOpen(true);
 			}
+			
+			plugin.removeSession(player);
 		}else {
 			session.setNextCommandFree(true);
 			
