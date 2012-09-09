@@ -1,9 +1,7 @@
 package org.melonbrew.fee.listeners;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -48,25 +46,7 @@ public class FeePlayerListener implements Listener {
 			return;
 		}
 		
-		Block signBlock = block.getRelative(BlockFace.UP);
-		
-		if (signBlock == null || !(signBlock.getState() instanceof Sign)){
-			return;
-		}
-		
-		if (player.hasPermission("fee.exempt")){
-			return;
-		}
-		
-		Sign sign = (Sign) signBlock.getState();
-		
-		String firstLine = ChatColor.stripColor(sign.getLine(0));
-		
-		String noColorSign = ChatColor.stripColor(Phrase.SIGN_START.parse());
-		
-		if (!(firstLine.equalsIgnoreCase(noColorSign))){
-			return;
-		}
+		Sign sign = plugin.getSign(player, block, true);
 		
 		plugin.removeSession(player);
 		

@@ -2,9 +2,7 @@ package org.melonbrew.fee.commands;
 
 import java.util.Random;
 
-import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Furnace;
@@ -59,21 +57,7 @@ public class YesCommand implements CommandExecutor {
 		double money;
 		
 		if (command == null){
-			Block signBlock = block.getRelative(BlockFace.UP);
-			
-			if (signBlock == null || !(signBlock.getState() instanceof Sign)){
-				return true;
-			}
-			
-			Sign sign = (Sign) signBlock.getState();
-			
-			String firstLine = ChatColor.stripColor(sign.getLine(0));
-			
-			String noColorSign = ChatColor.stripColor(Phrase.SIGN_START.parse());
-			
-			if (!(firstLine.equalsIgnoreCase(noColorSign))){
-				return true;
-			}
+			Sign sign = plugin.getSign(player, block, true);
 			
 			money = Double.parseDouble(sign.getLine(1));
 		}else {

@@ -9,6 +9,9 @@ import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.Sign;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -67,6 +70,30 @@ public class Fee extends JavaPlugin {
 		getCommand("fee").setExecutor(new FeeCommand(this));
 		
 		getCommand("yes").setExecutor(new YesCommand(this));
+	}
+	
+	public Sign getSign(Player player, Block block, boolean up){
+		Block signBlock = block.getRelative(up ? BlockFace.UP : BlockFace.DOWN);
+		
+		if (signBlock == null || !(signBlock.getState() instanceof Sign)){
+			return null;
+		}
+		
+		if (player.hasPermission("fee.exempt")){
+			return null;
+		}
+		
+		Sign sign = (Sign) signBlock.getState();
+		
+		if (!isSignFee(sign.getLine(0))){
+			return null;
+		}
+		
+		return sign;
+	}
+	
+	public boolean isSignFee(String firstLine){
+		return ChatColor.stripColor(firstLine).equals(ChatColor.stripColor(Phrase.SIGN_START.parse()));
 	}
 	
 	public void addSupportedBlock(Material type){
