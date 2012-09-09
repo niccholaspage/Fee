@@ -40,6 +40,7 @@ public class Fee extends JavaPlugin {
 		addSupportedBlock(Material.WOODEN_DOOR);
 		addSupportedBlock(Material.TRAP_DOOR);
 		addSupportedBlock(Material.FURNACE);
+		addSupportedBlock(Material.BURNING_FURNACE);
 		addSupportedBlock(Material.CHEST);
 		addSupportedBlock(Material.FENCE_GATE);
 		
