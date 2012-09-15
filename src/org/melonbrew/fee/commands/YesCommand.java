@@ -60,6 +60,14 @@ public class YesCommand implements CommandExecutor {
 			sign = plugin.getSign(player, block, true);
 		}
 		
+		if (sign == null && block != null){
+			plugin.removeSession(player);
+			
+			Phrase.NO_PENDING_COMMAND.sendWithPrefix(sender);
+			
+			return true;
+		}
+		
 		double money;
 		
 		if (command == null){
@@ -88,7 +96,7 @@ public class YesCommand implements CommandExecutor {
 		
 		if (sign != null){
 			reciever = sign.getLine(2);
-		}else {
+		}else {			
 			reciever = plugin.getConfig().getString("serveraccount");
 		}
 		
