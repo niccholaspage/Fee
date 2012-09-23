@@ -14,6 +14,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.material.Door;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.melonbrew.fee.commands.YesCommand;
@@ -75,6 +76,12 @@ public class Fee extends JavaPlugin {
 	
 	public Sign getSign(Player player, Block block, boolean up){
 		Block signBlock = block.getRelative(up ? BlockFace.UP : BlockFace.DOWN);
+		
+		if (block.getType() == Material.WOODEN_DOOR && up && signBlock.getType() != Material.SIGN){
+			Door door = (Door) block.getState();
+			
+			signBlock = signBlock.getRelative(door.getFacing());
+		}
 		
 		if (signBlock == null || !(signBlock.getState() instanceof Sign)){
 			return null;
