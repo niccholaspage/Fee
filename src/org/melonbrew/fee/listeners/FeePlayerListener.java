@@ -52,6 +52,12 @@ public class FeePlayerListener implements Listener {
 			return;
 		}
 		
+		String name = sign.getLine(2);
+		
+		if (name.equalsIgnoreCase(player.getName())){
+			return;
+		}
+		
 		plugin.removeSession(player);
 		
 		plugin.addSession(new Session(player, block));
