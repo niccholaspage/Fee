@@ -78,7 +78,7 @@ public class Fee extends JavaPlugin {
 		Block signBlock = block.getRelative(up ? BlockFace.UP : BlockFace.DOWN);
 		
 		if (block.getState().getData() instanceof Door && up && signBlock.getType() != Material.SIGN){
-			Door door = (Door) block.getState();
+			Door door = (Door) block.getState().getData();
 			
 			signBlock = signBlock.getRelative(door.getFacing().getOppositeFace());
 			
