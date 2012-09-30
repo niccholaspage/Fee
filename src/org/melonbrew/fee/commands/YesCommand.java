@@ -69,6 +69,8 @@ public class YesCommand implements CommandExecutor {
 		}
 		
 		if (!isBlockInRadius(block, player.getLocation().getBlock(), 5)){
+			plugin.removeSession(player);
+			
 			Phrase.FAR_AWAY_FROM_BLOCK.sendWithPrefix(sender);
 			
 			return true;
