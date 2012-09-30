@@ -3,5 +3,8 @@ serveraccount: /Fee
 closespeed: 5
 
 globalcommands:
+  /stopagaben: 500
 
 groupcommands:
+  VIP:
+    /stopagaben: 200
