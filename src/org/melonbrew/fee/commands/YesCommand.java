@@ -124,6 +124,8 @@ public class YesCommand implements CommandExecutor {
 				
 				long closeSpeed = plugin.getConfig().getLong("closespeed");
 				
+				System.out.println("door open" + "," + closeSpeed);
+				
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new FeeCloseDoorTask(plugin, block), closeSpeed);
 			} else if (state instanceof Furnace){
 				player.openInventory(((Furnace) state).getInventory());
