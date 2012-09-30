@@ -62,6 +62,8 @@ public class FeeBlockListener implements Listener {
 				if (check.getType() == Material.WOODEN_DOOR){
 					bottomBlock = check;
 					
+					System.out.println("Gaben");
+					
 					break;
 				}
 			}
