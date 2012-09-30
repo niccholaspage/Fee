@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.material.Door;
 import org.bukkit.material.Gate;
+import org.bukkit.material.MaterialData;
 import org.bukkit.material.TrapDoor;
 import org.melonbrew.fee.Fee;
 import org.melonbrew.fee.Phrase;
@@ -115,10 +116,12 @@ public class YesCommand implements CommandExecutor {
 		if (command == null){
 			BlockState state = block.getState();
 			
-			if (state instanceof Door){
-				((Door) state).setOpen(true);
-			}else if (state.getData() instanceof TrapDoor){
-				((TrapDoor) state.getData()).setOpen(true);
+			MaterialData data = state.getData();
+			
+			if (data instanceof Door){
+				((Door) data).setOpen(true);
+			}else if (data instanceof TrapDoor){
+				((TrapDoor) data).setOpen(true);
 			} else if (state instanceof Furnace){
 				player.openInventory(((Furnace) state).getInventory());
 			} else if (state instanceof Chest){
