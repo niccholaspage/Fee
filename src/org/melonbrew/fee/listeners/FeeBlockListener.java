@@ -53,16 +53,14 @@ public class FeeBlockListener implements Listener {
 		if (!plugin.containsSupportedBlock(bottomBlock.getType())){
 			Block[] checkBlock = new Block[4];
 			
-			checkBlock[0] = block.getRelative(BlockFace.NORTH);
-			checkBlock[1] = block.getRelative(BlockFace.EAST);
-			checkBlock[2] = block.getRelative(BlockFace.SOUTH);
-			checkBlock[3] = block.getRelative(BlockFace.WEST);
+			checkBlock[0] = bottomBlock.getRelative(BlockFace.NORTH);
+			checkBlock[1] = bottomBlock.getRelative(BlockFace.EAST);
+			checkBlock[2] = bottomBlock.getRelative(BlockFace.SOUTH);
+			checkBlock[3] = bottomBlock.getRelative(BlockFace.WEST);
 			
 			for (Block check : checkBlock){
 				if (check.getType() == Material.WOODEN_DOOR){
 					bottomBlock = check;
-					
-					System.out.println("Gaben");
 					
 					break;
 				}
