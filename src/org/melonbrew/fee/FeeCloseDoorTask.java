@@ -17,8 +17,6 @@ public class FeeCloseDoorTask implements Runnable {
 	}
 	
 	public void run(){
-		System.out.println(door.getType());
-		
 		MaterialData data = door.getState().getData();
 		
 		if (data instanceof Door || data instanceof TrapDoor){

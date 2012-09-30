@@ -122,9 +122,7 @@ public class YesCommand implements CommandExecutor {
 			if (data instanceof Door || data instanceof TrapDoor){
 				plugin.openDoor(block);
 				
-				long closeSpeed = plugin.getConfig().getLong("closespeed");
-				
-				System.out.println("door open" + "," + closeSpeed);
+				long closeSpeed = plugin.getConfig().getLong("closespeed") * 20;
 				
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new FeeCloseDoorTask(plugin, block), closeSpeed);
 			} else if (state instanceof Furnace){
