@@ -137,18 +137,18 @@ public class YesCommand implements CommandExecutor {
 		return true;
 	}
 	
-	private boolean isBlockInRadius(Block block, Block playerLocation, int radius){
+	private boolean isBlockInRadius(Block block, Block playerBlock, int radius){
 		int x = block.getX();
 		
 		int y = block.getY();
 		
 		int z = block.getZ();
 		
-		int playerX = block.getX();
+		int playerX = playerBlock.getX();
 		
-		int playerY = block.getY();
+		int playerY = playerBlock.getY();
 		
-		int playerZ = block.getZ();
+		int playerZ = playerBlock.getZ();
 		
 		if (x > playerX){
 			if (x - playerX > radius){
