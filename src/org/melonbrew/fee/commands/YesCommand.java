@@ -118,10 +118,10 @@ public class YesCommand implements CommandExecutor {
 			
 			MaterialData data = state.getData();
 			
-			System.out.println(block.getType() + "," + (data instanceof Door));
-			
 			if (data instanceof Door){
 				((Door) data).setOpen(true);
+				
+				block.setData(data.getData());
 			}else if (data instanceof TrapDoor){
 				((TrapDoor) data).setOpen(true);
 			} else if (state instanceof Furnace){
