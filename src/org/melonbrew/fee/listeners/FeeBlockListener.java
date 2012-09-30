@@ -55,7 +55,9 @@ public class FeeBlockListener implements Listener {
 			return;
 		}
 		
-		event.setLine(2, player.getName());
+		if (!player.hasPermission("fee.sign.other") || event.getLine(2).isEmpty()){
+			event.setLine(2, player.getName());
+		}
 		
 		Phrase.CREATED_A_SIGN.sendWithPrefix(player);
 	}
