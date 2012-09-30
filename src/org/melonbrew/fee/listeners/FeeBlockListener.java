@@ -97,6 +97,8 @@ public class FeeBlockListener implements Listener {
 			return;
 		}
 		
+		event.setCancelled(true);
+		
 		Phrase.CAN_NOT_BREAK_FEE_BLOCK.sendWithPrefix(player);
 	}
 	
