@@ -65,7 +65,7 @@ public class Fee extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		
 		getConfig().options().header("Fee Config - melonbrew.org\n" +
-				"# serveraccount - An account for fees to go too. (Blank for none)\n" +
+				"# serveraccount - An account for fees to go to. (Blank for none)\n" +
 				"# closespeed - How many milliseconds (1000 milliseconds is 1 second) before doors, trapdoors and gates auto close.\n" +
 				"# globalcommands - A command followed by it's cost. For all players.\n" +
 				"# groupcommands - Per group commands.");
@@ -157,7 +157,7 @@ public class Fee extends JavaPlugin {
 		if (block.getType() == Material.TRAP_DOOR){
 			BlockState state = block.getState();
 
-			TrapDoor trapdoor = (TrapDoor)state.getData();
+			TrapDoor trapdoor = (TrapDoor) state.getData();
 
 			trapdoor.setOpen(false);
 
