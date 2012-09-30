@@ -3,10 +3,12 @@ package org.melonbrew.fee.listeners;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.melonbrew.fee.Fee;
 import org.melonbrew.fee.Phrase;
@@ -80,6 +82,22 @@ public class FeeBlockListener implements Listener {
 		}
 		
 		Phrase.CREATED_A_SIGN.sendWithPrefix(player);
+	}
+	
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onBlockBreak(BlockBreakEvent event){
+		Block block = event.getBlock();
+		
+		Player player = event.getPlayer();
+		
+		//Null so a permission check doesn't occur
+		Sign sign = plugin.getSign(null, block, true);
+		
+		if (sign == null){
+			return;
+		}
+		
+		Phrase.CAN_NOT_BREAK_FEE_BLOCK.sendWithPrefix(player);
 	}
 	
 	private void cancelSignChange(SignChangeEvent event){

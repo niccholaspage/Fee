@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 public enum Phrase {
 	VAULT_HOOK_FAILED("Could not hook into Vault - disabling Fee."),
 	BLOCK_WILL_COST("This block will cost $1. Type /yes to use this command."),
+	CAN_NOT_BREAK_FEE_BLOCK("You cannot break a Fee block."),
 	COMMAND_WILL_COST("This command will cost $1. Type /yes to use this command."),
 	NEED_MONEY("You need $1 to use this command."),
 	NO_PENDING_COMMAND("You don't have a pending command."),

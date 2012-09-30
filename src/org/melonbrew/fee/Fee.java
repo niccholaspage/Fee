@@ -90,7 +90,7 @@ public class Fee extends JavaPlugin {
 			return null;
 		}
 		
-		if (player.hasPermission("fee.exempt")){
+		if (player != null && player.hasPermission("fee.exempt")){
 			return null;
 		}
 		
