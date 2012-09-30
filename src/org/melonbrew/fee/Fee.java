@@ -82,7 +82,9 @@ public class Fee extends JavaPlugin {
 			
 			signBlock = signBlock.getRelative(door.getFacing().getOppositeFace());
 			
-			signBlock.setType(Material.STONE);
+			System.out.println("Block check: " + block.getType());
+			
+			signBlock.setType(Material.BEDROCK);
 		}
 		
 		if (signBlock == null || !(signBlock.getState() instanceof Sign)){
