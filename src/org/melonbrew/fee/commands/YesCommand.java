@@ -118,6 +118,8 @@ public class YesCommand implements CommandExecutor {
 			
 			MaterialData data = state.getData();
 			
+			System.out.println(block.getType() + "," + (data instanceof Door)));
+			
 			if (data instanceof Door){
 				((Door) data).setOpen(true);
 			}else if (data instanceof TrapDoor){
@@ -126,8 +128,8 @@ public class YesCommand implements CommandExecutor {
 				player.openInventory(((Furnace) state).getInventory());
 			} else if (state instanceof Chest){
 				player.openInventory(((Chest) state).getInventory());
-			} else if (state.getData() instanceof Gate){
-				((Gate) state.getData()).setOpen(true);
+			} else if (data instanceof Gate){
+				((Gate) data).setOpen(true);
 			}
 			
 			plugin.removeSession(player);
