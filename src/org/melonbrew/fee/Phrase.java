@@ -20,6 +20,7 @@ public enum Phrase {
 	SIGN_START("[Fee]"),
 	INVALID_AMOUNT("You cannot create a sign with an invalid amount of money."),
 	NOT_ABOVE_SUPPORTED_ITEM("The sign is not above a supported block."),
+	FAR_AWAY_FROM_BLOCK("You are too far away from the block."),
 	CREATED_A_SIGN("You've created a Fee sign."),
 	COMMAND_HELP("Gives you help", true),
 	COMMAND_RELOAD("Reloads the config", true);

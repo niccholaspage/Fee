@@ -68,6 +68,12 @@ public class YesCommand implements CommandExecutor {
 			return true;
 		}
 		
+		if (!isBlockInRadius(block, player.getLocation().getBlock(), 5)){
+			Phrase.FAR_AWAY_FROM_BLOCK.sendWithPrefix(sender);
+			
+			return true;
+		}
+		
 		double money;
 		
 		if (command == null){
@@ -128,5 +134,50 @@ public class YesCommand implements CommandExecutor {
 		
 		return true;
 	}
-
+	
+	private boolean isBlockInRadius(Block block, Block playerLocation, int radius){
+		int x = block.getX();
+		
+		int y = block.getY();
+		
+		int z = block.getZ();
+		
+		int playerX = block.getX();
+		
+		int playerY = block.getY();
+		
+		int playerZ = block.getZ();
+		
+		if (x > playerX){
+			if (x - playerX > radius){
+				return false;
+			}
+		}else {
+			if (playerX - x > radius){
+				return false;
+			}
+		}
+		
+		if (y > playerY){
+			if (y - playerY > radius){
+				return false;
+			}
+		}else {
+			if (playerY - y > radius){
+				return false;
+			}
+		}
+		
+		if (z > playerZ){
+			if (z - playerZ > radius){
+				return false;
+			}
+		}else {
+			if (playerZ - z > radius){
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }
