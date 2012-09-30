@@ -1,5 +1,6 @@
 package org.melonbrew.fee.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -45,14 +46,33 @@ public class FeeBlockListener implements Listener {
 			return;
 		}
 		
-		Block bottomBlock = event.getBlock().getRelative(BlockFace.DOWN);
+		Block block = event.getBlock();
+		
+		Block bottomBlock = block.getRelative(BlockFace.DOWN);
 		
 		if (!plugin.containsSupportedBlock(bottomBlock.getType())){
-			cancelSignChange(event);
+			Block[] checkBlock = new Block[4];
 			
-			Phrase.NOT_ABOVE_SUPPORTED_ITEM.sendWithPrefix(player);
+			checkBlock[0] = block.getRelative(BlockFace.NORTH);
+			checkBlock[1] = block.getRelative(BlockFace.EAST);
+			checkBlock[2] = block.getRelative(BlockFace.SOUTH);
+			checkBlock[3] = block.getRelative(BlockFace.WEST);
 			
-			return;
+			for (Block check : checkBlock){
+				if (check.getType() == Material.WOODEN_DOOR){
+					bottomBlock = check;
+					
+					break;
+				}
+			}
+			
+			if (!plugin.containsSupportedBlock(bottomBlock.getType())){
+				cancelSignChange(event);
+				
+				Phrase.NOT_ABOVE_SUPPORTED_ITEM.sendWithPrefix(player);
+				
+				return;
+			}
 		}
 		
 		if (!player.hasPermission("fee.sign.other") || event.getLine(2).isEmpty()){
