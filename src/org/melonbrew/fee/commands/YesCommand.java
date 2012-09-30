@@ -70,7 +70,7 @@ public class YesCommand implements CommandExecutor {
 			return true;
 		}
 
-		if (!isBlockInRadius(block, player.getLocation().getBlock(), 5)){
+		if (block != null && !isBlockInRadius(block, player.getLocation().getBlock(), 5)){
 			plugin.removeSession(player);
 
 			Phrase.FAR_AWAY_FROM_BLOCK.sendWithPrefix(sender);
